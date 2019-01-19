@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Watcher</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+
+  <form id="command_form" action="command" method="POST">
+      <p>Send command</p>
+      <p>
+        <select name="commandSelect">
+          <option value="reboot">Reboot</option>
+          <option value="turn_on_off">Turn on/off</option>
+          <option value="hard_turn_off">Hard turn off</option>
+        </select>
+      </p>
+
+      <p>
+        <select id="rig_select" name="rigSelect">
+          <option value="all">All</option>
+        </select>
+      </p>
+
+      <p><input type="submit" value="Send"></p>
+  </form>
+
+  <!-- <script src="js/scripts.js"></script> -->
+  <script type="text/javascript">
+    function fillRigSelect() {  
+    var sel = document.getElementById('rig_select');
+      const rigsCount = 16;
+      for(var i = 1; i <= rigsCount; ++i) {
+        var opt = document.createElement('option');
+        opt.innerHTML = i;
+        opt.value = i;
+        sel.appendChild(opt);
+      }
+  }  
+  fillRigSelect()
+  </script>
+</body>
+</html> 
