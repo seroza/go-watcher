@@ -5,7 +5,15 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
+
+	"github.com/go-watcher/watcher/gpio"
+)
+
+// Expected commands list
+const (
+	reboot      = "reboot"
+	turnOnOff   = "turn_on_off"
+	hardTurnOff = "hard_turn_off"
 )
 
 //Command for watcher control
@@ -15,8 +23,16 @@ type Command struct {
 }
 
 func (cmd *Command) execute() {
-	log.Println("command execution is not implemented yet")
-	time.Sleep(time.Second * 4)
+	switch cmd.Command {
+	case reboot:
+		gpio.DeviceInstance().Reboot(cmd.Value)
+	case turnOnOff:
+		gpio.DeviceInstance().TurnOnOff(cmd.Value)
+	case hardTurnOff:
+		gpio.DeviceInstance().HardTurnOff(cmd.Value)
+	default:
+		log.Println("wrong command received")
+	}
 }
 
 //ParseReq makes Command struct from reques data
